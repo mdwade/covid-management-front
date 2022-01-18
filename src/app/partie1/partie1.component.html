@@ -1,0 +1,94 @@
+
+
+<div class="row m-3 p-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="mb-2"><img src="assets/question-signe-en-cercles.png" style="width: 30px; margin-right: 10px" />Question 1</h4>
+        <p>Afficher le continent, Nombre total de cas (total_cases), Nombre total de nouveaux
+          cas (new_cases), Nombre total de décés (total_deaths), Nombre total de nouveaux
+          décés (new_deaths) par pays pour une date donnée.</p>
+  
+          <div class="mt-5 mb-3">
+            <label for="q1" class="form-label">Entrez une date.</label>
+            <input type="date" class="form-control" id="q1" [(ngModel)]="date_q1" >
+          </div>
+          <button type="submit" class="btn btn-success mb-3" (click)="getQ1()">Submit</button>
+  
+        <h6 class="mt-4 text-muted" *ngIf="data_q1.length == 0">No data available yet !</h6>
+        <table class="table table-striped table-bordered table-sm row-border hover" *ngIf="data_q1.length != 0" 
+                datatable [dtOptions]="dtOptions">
+          <thead>
+          <tr>
+            <th scope="col">Continent</th>
+            <th scope="col">ISO CODE</th>
+            <th scope="col">Location</th>
+            <th scope="col">Total cases</th>
+            <th scope="col">New cases</th>
+            <th scope="col">Total deaths</th>
+            <th scope="col">new deaths</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let d of data_q1">
+            <th scope="row">{{d.continent}}</th>
+            <td>{{d.iso_code}}</td>
+            <td>{{d.location}}</td>
+            <td>{{d.total_cases}}</td>
+            <td>{{d.new_cases}}</td>
+            <td>{{d.total_deaths}}</td>
+            <td>{{d.new_deaths}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row m-3 p-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="mb-2"><img src="assets/question-signe-en-cercles.png" style="width: 30px; margin-right: 10px" />Question 2</h4>
+        <p>Afficher la liste des différents pays (sans doublons) pour un continent donné. Les
+          données à afficher sont le libellé du pays (Location), le code iso (iso_code).</p>
+  
+          <div class="my-5">
+            <label class="form-label">Choisir le continent</label>
+            <select class="form-select" aria-label="Default select example" [(ngModel)]="continent" (change)="getQ2()">
+              <option value="Africa">Africa</option>
+              <option value="Asia">Asia</option>
+              <option value="Europe">Europe</option>
+              <option value="South America">South America</option>
+              <option value="North America">North America</option>
+              <option value="Oceania">Oceania</option>
+            </select>
+          </div>
+  
+        <table *ngIf="data_q2.length != 0" class="table table-striped table-bordered table-sm row-border hover"
+                datatable [dtOptions]="dtOptions">
+          <thead>
+          <tr>
+            <th scope="col">ISO CODE</th>
+            <th scope="col">Location</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let d of data_q2">
+            <th scope="row">{{d.iso_code}}</th>
+            <td>{{d.location}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row m-3 p-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="mb-2"><img src="assets/question-signe-en-cercles.png" style="width: 30px; margin-right: 10px" />Question 3</h4>
+        <p>Afficher le nombre de différents continents.</p>
+        <span style="color: green; font-weight: bold; font-size: 20px">Reponse : {{nbContinent}}</span>
+      </div>
+    </div>
+  </div>
+  

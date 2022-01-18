@@ -1,0 +1,212 @@
+
+  <div class="row m-3 p-3">
+    <div class="card">
+      <div class="card-body">
+        <h4><img src="assets/question-signe-en-cercles.png" style="width: 30px; margin-right: 10px" />Question 1</h4>
+        <p class="mb-4">Pour un pays(code iso), on veut afficher un graphe donnant le nombre de cas par mois 
+          sur un intervalle donné.</p>
+
+        <div class="row">
+          <div class="col-md-5">            
+            <div class="mb-3 row">
+              <label class="col-sm-3 col-form-label">Pays</label>
+              <div class="col-sm-6">
+                <select class="form-control custom-select" [(ngModel)]="isoCodeQ1">
+                  <option value="AGO">AGO</option>
+                  <option value="CAN">Canada</option>
+                  <option value="SEN">Sénégal</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label class="col-sm-3 col-form-label">Date début</label>
+              <div class="col-sm-6">
+                <input type="date" class="form-control" id="inputPassword2" [(ngModel)]="startedDateQ1">
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label class="col-sm-3 col-form-label">Date fin</label>
+              <div class="col-sm-6">
+                <input type="date" class="form-control" id="inputPassword2" [(ngModel)]="endedDateQ1">
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label class="col-sm-3 col-form-label"></label>
+              <div class="col-sm-6">
+                <button (click)="getQ1()" class="btn btn-success mb-3">Valider</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="display: block;">
+              <canvas baseChart 
+                [datasets]="barChartDataQ1"
+                [labels]="barChartLabelsQ1"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [type]="'bar'">
+              </canvas>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-3 p-3">
+    <div class="card">
+      <div class="card-body">
+        <h4><img src="assets/question-signe-en-cercles.png" style="width: 30px; margin-right: 10px" />Question 2</h4>
+        <p class="mb-4">Pour un pays, on veut afficher un graphe donnant le nombre de nouveaux décés par 
+          mois sur un intervalle donné .</p>
+
+          <div class="row">
+            <div class="col-md-5">            
+              <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Pays</label>
+                <div class="col-sm-6">
+                  <select class="form-control custom-select" [(ngModel)]="isoCodeQ2">
+                    <option value="AGO">AGO</option>
+                    <option value="CAN">Canada</option>
+                    <option value="SEN">Sénégal</option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Date début</label>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control" id="inputPassword2" [(ngModel)]="startedDateQ2">
+                </div>
+              </div>
+  
+              <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Date fin</label>
+                <div class="col-sm-6">
+                  <input type="date" class="form-control" id="inputPassword2" [(ngModel)]="endedDateQ2">
+                </div>
+              </div>
+  
+              <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label"></label>
+                <div class="col-sm-6">
+                  <button (click)="getQ2()" class="btn btn-success mb-3">Valider</button>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-md-6">
+              <div style="display: block;">
+                <canvas baseChart 
+                  [datasets]="barChartDataQ2"
+                  [labels]="barChartLabelsQ2"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [legend]="barChartLegend"
+                  [type]="'line'">
+                </canvas>
+              </div>
+            </div>
+  
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row m-3 p-3">
+    <div class="card">
+      <div class="card-body">
+        <h4><img src="assets/question-signe-en-cercles.png" style="width: 30px; margin-right: 10px" />Question 3</h4>
+        <p>Pour chaque continent aussi, donnez le nombre de cas à une date donnée.</p>
+  
+        <div class="mb-3">
+          <label for="q1" class="form-label">Entrez une date.</label>
+          <input type="date" class="form-control" id="q1" [(ngModel)]="dateQ3" >
+        </div>
+        <button type="submit" class="btn btn-success" (click)="getQ3()">Submit</button>
+
+        <h6 class="mt-4 text-muted" *ngIf="dataQ3.length == 0">No data available yet !</h6>
+        
+        <div class="mt-4">
+          <table class="table table-striped table-bordered table-sm row-border hover" *ngIf="dataQ3.length != 0"
+              datatable [dtOptions]="dtOptions">
+            <thead>
+            <tr>
+              <th scope="col">Continent</th>
+              <th scope="col">Total Cases</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let d of dataQ3">
+              <th scope="row">{{d.continent}}</th>
+              <td>{{d.total_cases}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <div class="row m-3 p-3">
+    <div class="card">
+      <div class="card-body">
+        <h4><img src="assets/question-signe-en-cercles.png" style="width: 30px; margin-right: 10px" />Question 4</h4>
+        <p>Pour un pays donné on souhaite avoir la date à laquelle le plus grand nombre de
+          nouveaux cas a été enregistré. On souhaite également afficher les informations
+          suivantes total_vaccinations, people_vaccinated, people_fully_vaccinated,
+          new_vaccinations, total_vaccinations_per_hundred,
+          people_vaccinated_per_hundred, people_fully_vaccinated_per_hundred.</p>
+  
+          <div class="mb-3">
+            <label for="q1" class="form-label">Entrez un pays.</label>
+            <input type="text" class="form-control" id="q4" [(ngModel)]="locationQ4">
+          </div>
+          <button type="submit" class="btn btn-success" (click)="getQ4()">Submit</button>
+
+        <h6 class="mt-4 text-muted" *ngIf="dataQ4.length == 0">No data available yet !</h6>
+        <div class="mt-4" *ngIf="dataQ4.length != 0">
+          <table class="table table-responsive table table-striped table-bordered table-sm row-border hover">
+            <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Total cases</th>
+              <th scope="col">Max new cases</th>
+              <th scope="col">Total vaccinations</th>
+              <th scope="col">People vaccinated</th>
+              <th scope="col">People fully vaccinated</th>
+              <th scope="col">New vaccinations</th>
+              <th scope="col">Total vaccinations per hundred</th>
+              <th scope="col">People vaccinated per hundred</th>
+              <th scope="col">People fully vaccinated per hundred</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let d of dataQ4">
+              <td>{{d.date}}</td>
+              <td>{{d.total_cases}}</td>
+              <td>{{d.max_new_cases}}</td>
+              <td>{{d.total_vaccinations}}</td>
+              <td>{{d.people_vaccinated}}</td>
+              <td>{{d.people_fully_vaccinated}}</td>
+              <td>{{d.new_vaccinations}}</td>
+              <td>{{d.total_vaccinations_per_hundred}}</td>
+              <td>{{d.people_vaccinated_per_hundred}}</td>
+              <td>{{d.people_fully_vaccinated_per_hundred}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
